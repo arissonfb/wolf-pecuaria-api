@@ -1,0 +1,15 @@
+services:
+  - type: web_service
+    name: wolf-pecuaria-api
+    env: node
+    branch: master
+    root: .
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_BOOTSTRAP_PASSWORD
+        sync: false
