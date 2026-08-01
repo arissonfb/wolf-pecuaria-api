@@ -68,9 +68,10 @@ app.use("/api", generalApiLimiter);
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 30,
   standardHeaders: true,
   legacyHeaders: false,
+  skipSuccessfulRequests: true, // login/troca de senha certos nao consomem o orcamento - so contam as falhas
   message: { error: "Muitas tentativas. Tente novamente em 15 minutos." },
 });
 
