@@ -7,6 +7,10 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
 const app = express();
+// Render (com Cloudflare na frente) sempre entrega o trafego por proxy - sem
+// isso, req.ip nao reflete o IP real do cliente e o rate limiting abaixo
+// nao bloqueia de verdade (cada request pode "parecer" uma origem diferente).
+app.set("trust proxy", true);
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
